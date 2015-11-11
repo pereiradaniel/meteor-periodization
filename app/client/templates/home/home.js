@@ -6,20 +6,27 @@ Template.Home.events({
       event.preventDefault()
       // t = event.target
 
+      debugger
+      var periodizer = Periodizers.find({ userId: Meteor.userId() }).fetch()[0]._id
       var forms = _.map($('.exercise-form'), function(form) { return $(form) })
       var arrayLength = forms.length
 
-      for (var i = 0; i < arrayLength; i++) {
-        var form = forms[i]
-        var exercise_name = form.children('.exercise_name').val()
-        var one_rm = form.children('.one_rm').val()
-
+      var addExercise = function(exercise_name, one_rm) {
           Exercises.insert({
             exercise_name: exercise_name,
-            one_rm: one_rm
+            one_rm: one_rm,
+            periodizer_id: periodizer
           })
         }
+    
+      for (var i = 0; i < arrayLength; i++) {
+          var form = forms[i]
+          var exercise_name = form.children('.exercise_name').val()
+          var one_rm = form.children('.one_rm').val()
+          addExercise(exercise_name, one_rm)
+        }
       }
+
 });
 
 /*****************************************************************************/
