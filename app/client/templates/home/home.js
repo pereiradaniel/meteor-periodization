@@ -9,19 +9,20 @@ Template.Home.events({
 /*****************************************************************************/
 Template.Home.helpers({
 
-	'exercises': function() {
-		var users_per_plan = Periodizers.find({ userId: Meteor.userId() })
-		return users_per_plan.no_of_exercises
-	},
 	'user_has_periodizer': function() {
-		Periodizers.find({ userId: Meteor.userId() })
+		return Periodizers.find({ userId: Meteor.userId() }).count()
 	},
-	loopCount: function(){
+	loopCount: function(count){
     var countArr = [];
-    for (var i=0; i< ; i++){
+    for (var i=0; i<count; i++){
       countArr.push({});
     }
     return countArr;
+  },
+  'no_of_exercises': function() {
+    var periodizer = Periodizers.find({ userId: Meteor.userId() }).fetch()
+    var count = periodizer[0].no_of_exercises
+    return count;
   }
 });
 
