@@ -4,11 +4,12 @@
 		
 		{{#if currentUser}}
 			{{#if user_has_periodizer}}
-
-	  		{{#each loopCount no_of_exercises}}	
-					{{> ExerciseForm}}
-				{{/each}}
-
+				<form id="exercises_form">
+		  		{{#each loopCount no_of_exercises}}	
+						{{> ExerciseForm}}
+					{{/each}}
+				<input type="submit">
+				</form>
 			{{else}}
     		{{> Periodizer}}
 

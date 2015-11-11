@@ -2,6 +2,24 @@
 /* Home: Event Handlers */
 /*****************************************************************************/
 Template.Home.events({
+    'submit #exercises_form': function(event) {
+      event.preventDefault()
+      // t = event.target
+
+      var forms = _.map($('.exercise-form'), function(form) { return $(form) })
+      var arrayLength = forms.length
+
+      for (var i = 0; i < arrayLength; i++) {
+        var form = forms[i]
+        var exercise_name = form.children('.exercise_name').val()
+        var one_rm = form.children('.one_rm').val()
+
+          Exercises.insert({
+            exercise_name: exercise_name,
+            one_rm: one_rm
+          })
+        }
+      }
 });
 
 /*****************************************************************************/
