@@ -4,16 +4,18 @@
 Template.Home.events({
     'submit #exercises_form': function(event) {
       event.preventDefault()
-      // t = event.target
-
+      
       // Variables from DOM
-      var periodizer = Periodizers.find({ periodizerId: periodizer }).fetch()[0]
+      var periodizer = Periodizers.find({ userId: Meteor.userId() }).fetch()[0]._id
       var periodizer_id = periodizer._id
       var forms = _.map($('.exercise-form'), function(form) { return $(form) })
       var number_of_forms = forms.length
+      
       // Variables required to calculate sets
       var weeks = pdizer.weeks
       var exercises = Exercises.find({ periodizer_id: periodizer }).fetch()
+        var sets = 4
+        var set_increment = 0.05
         var no_of_exercises = periodizer.no_of_exercises
         var strength_weeks = weeks - 1
         var base_percentage = 0.6
@@ -34,10 +36,8 @@ Template.Home.events({
         },
     
     calculateWeeklySet: function(week_number, exercise) {
-      var set_increment = 0.05
       var base_relative_to_week = base_percentage + (weekly_percentage_increment * week_number)
       var max = exercises[exercise].one_rm
-      var sets = 4
       var reps = light_reps - (weekly_rep_decrement * week_number)
       for var(set = 1; set < sets; set++) {
         var percent = base_relative_to_week + (set * 0.05)
@@ -50,29 +50,38 @@ Template.Home.events({
       }
       return output
     },
-    
-    // ADDS EXERCISE DOCUMENTS TO COLLECTION
-    for (var current_form = 0; current_form < number_of_forms; i++) {
-        var form = forms[current_form]
-        var exercise_name = form.children('.exercise_name').val()
-        var one_rm = form.children('.one_rm').val()
-        addExercise(exercise_name, one_rm)
-      }
-    },
 
-    // ADDS CHART DOCUMENT TO COLLECTION
-
-    // iterate over each week - insert into chart after -> iterate over each exercise - insert into week
+    addChartToCollection: function() {
+      Charts.insert({
+        user_id: Meteor.userId(),
+        periodization_id: periodizer_id,
+      })
+      
+      var chart = Charts.find({ userId: Meteor.userId() }).fetch()[0]
 
       for (var week = 1; week < weeks; week++) {
         var calculated_week = {}
         for (var exercise = 0; exercise < exercises.length; exercise++) {
           var exercise_weekly_set = calculateWeeklySet(week, exercises[exercise])
-          // EMBED EXERCISE WEEKLY SET INSIDE OF CALCULATED WEEK
-          }
+          calculated_week.push({exercise_weekly_set})
         }
+        chart.push({calculated_week})
+      }
+    },
 
+    // ADDS EXERCISE DOCUMENTS TO COLLECTION
+    for (var current_form = 0; current_form < number_of_forms; i++) {
+        form = forms[current_form]
+        exercise_name = form.children('.exercise_name').val()
+        one_rm = form.children('.one_rm').val()
+        addExercise(exercise_name, one_rm)
+      }
 
+      addChartToCollection()
+
+    // ADDS CHART DOCUMENT TO COLLECTION
+
+  },
 });
 
 /*****************************************************************************/
