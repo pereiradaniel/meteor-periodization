@@ -32,42 +32,22 @@ Template.Home.events({
       periodizer_id: periodizer
     })
 
-    // iterate over each week - insert into chart after -> iterate over each exercise - insert into week
-
-
-
-    calculateWeek: function() {
-      var periodizer = Periodizers.find({ userId: Meteor.userId() }).fetch()[0]
-      var weeks = perodizer.weeks
+    var periodizer = Periodizers.find({ userId: Meteor.userId() }).fetch()[0]
+    var weeks = perodizer.weeks
+    var exercises = Exercises.find({ periodizer_id: periodizer }).fetch()
       var no_of_exercises = periodizer.no_of_exercises
-
-      var exercises = Exercises.find({ periodizer_id: periodizer }).fetch()
-      
+      var strength_weeks = weeks - 1
       var base_percentage = 0.6
       var high_percentage = 0.8
       var final_week_base_percentage = 0.5
-
       var heaviest_percentage = 0.95
-
       var heavy_reps = 3
       var light_reps = 6
+      var weekly_percentage_increment = (high_percentage - base_percentage) / strength_weeks
       var weekly_rep_decrement = (light_reps - heavy_reps) / strength_weeks // ROUND THIS # !!!
 
-      var strength_weeks = weeks - 1
-      var weekly_percentage_increment = (high_percentage - base_percentage) / strength_weeks
+    // iterate over each week - insert into chart after -> iterate over each exercise - insert into week
 
-      // Calculate strength weeks
-      for (var week = 1; week < weeks; week++) {
-        var exercise_weekly_set = {}
-        for (var exercise = 0; exercise < exercises.length; exercise++) {
-          var exercise_weekly_set = calculateWeeklySet(week, exercises[exercise])
-          // returns week with four sets with weights and exercise id
-          
-          }
-        // insert into chart
-
-        }
-    },
 
     calculateWeeklySet: function(week_number, exercise) {
       var set_increment = 0.05
