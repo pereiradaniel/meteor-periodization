@@ -6,49 +6,33 @@ Template.Home.events({
       event.preventDefault()
       // t = event.target
 
-      var periodizer = Periodizers.find({ userId: Meteor.userId() }).fetch()[0]._id
+      // Variables from DOM
+      var periodizer = Periodizers.find({ periodizerId: periodizer }).fetch()[0]
+      var periodizer_id = periodizer._id
       var forms = _.map($('.exercise-form'), function(form) { return $(form) })
-      var arrayLength = forms.length
+      var number_of_forms = forms.length
+      // Variables required to calculate sets
+      var weeks = pdizer.weeks
+      var exercises = Exercises.find({ periodizer_id: periodizer }).fetch()
+        var no_of_exercises = periodizer.no_of_exercises
+        var strength_weeks = weeks - 1
+        var base_percentage = 0.6
+        var high_percentage = 0.8
+        var final_week_base_percentage = 0.5
+        var heaviest_percentage = 0.95
+        var heavy_reps = 3
+        var light_reps = 6
+        var weekly_percentage_increment = (high_percentage - base_percentage) / strength_weeks
+        var weekly_rep_decrement = (light_reps - heavy_reps) / strength_weeks // ROUND THIS # !!!
 
-      var current_week = []
-
-      var addExercise = function(exercise_name, one_rm) {
+    addExercise: function(exercise_name, one_rm) {
           Exercises.insert({
             exercise_name: exercise_name,
             one_rm: one_rm,
-            periodizer_id: periodizer
+            periodizer_id: periodizer_id
           })
-        }
+        },
     
-      for (var i = 0; i < arrayLength; i++) {
-          var form = forms[i]
-          var exercise_name = form.children('.exercise_name').val()
-          var one_rm = form.children('.one_rm').val()
-          addExercise(exercise_name, one_rm)
-        }
-      },
-
-    var chart = Charts.insert({
-      periodizer_id: periodizer
-    })
-
-    var periodizer = Periodizers.find({ userId: Meteor.userId() }).fetch()[0]
-    var weeks = perodizer.weeks
-    var exercises = Exercises.find({ periodizer_id: periodizer }).fetch()
-      var no_of_exercises = periodizer.no_of_exercises
-      var strength_weeks = weeks - 1
-      var base_percentage = 0.6
-      var high_percentage = 0.8
-      var final_week_base_percentage = 0.5
-      var heaviest_percentage = 0.95
-      var heavy_reps = 3
-      var light_reps = 6
-      var weekly_percentage_increment = (high_percentage - base_percentage) / strength_weeks
-      var weekly_rep_decrement = (light_reps - heavy_reps) / strength_weeks // ROUND THIS # !!!
-
-    // iterate over each week - insert into chart after -> iterate over each exercise - insert into week
-
-
     calculateWeeklySet: function(week_number, exercise) {
       var set_increment = 0.05
       var base_relative_to_week = base_percentage + (weekly_percentage_increment * week_number)
@@ -66,6 +50,28 @@ Template.Home.events({
       }
       return output
     },
+    
+    // ADDS EXERCISE DOCUMENTS TO COLLECTION
+    for (var current_form = 0; current_form < number_of_forms; i++) {
+        var form = forms[current_form]
+        var exercise_name = form.children('.exercise_name').val()
+        var one_rm = form.children('.one_rm').val()
+        addExercise(exercise_name, one_rm)
+      }
+    },
+
+    // ADDS CHART DOCUMENT TO COLLECTION
+
+    // iterate over each week - insert into chart after -> iterate over each exercise - insert into week
+
+      for (var week = 1; week < weeks; week++) {
+        var calculated_week = {}
+        for (var exercise = 0; exercise < exercises.length; exercise++) {
+          var exercise_weekly_set = calculateWeeklySet(week, exercises[exercise])
+          // EMBED EXERCISE WEEKLY SET INSIDE OF CALCULATED WEEK
+          }
+        }
+
 
 });
 
