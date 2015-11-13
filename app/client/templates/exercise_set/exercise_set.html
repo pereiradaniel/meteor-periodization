@@ -1,0 +1,14 @@
+<template name="ExerciseSet">
+  <div class="exercise-set">
+    <h1>Find me in app/client/templates/exercise_set/exercise_set</h1>
+		{{ #with this}}
+			<ul>
+				<li>{{ exercise_name(this) }}</li>
+				<li>{{ week }}</li>
+				<li>{{ set }}</li>
+				<li>{{ reps }}</li>
+				<li>{{ weight_this_set}}</li>
+			</ul>
+		{{ /with }}
+  </div>
+</template>
