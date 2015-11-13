@@ -9,12 +9,11 @@ Template.Chart.events({
 /* Chart: Helpers */
 /*****************************************************************************/
 Template.Chart.helpers({
-	 //  'display_chart': function() {
-    
-  //   var display = Charts.find({ user_id: Meteor.userId() }).fetch()[0]
-  //   debugger
-  //   return display("weeks")
-  // },
+	'chart': function() {  
+    // var chart = Charts.find({ user_id: Meteor.userId() }).fetch()[0]
+    // var chart_weeks = chart.weeks
+    return Charts.find({ user_id: Meteor.userId() }).fetch()[0]
+  }
 });
 
 /*****************************************************************************/
