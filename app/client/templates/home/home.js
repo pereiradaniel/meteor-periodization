@@ -6,7 +6,7 @@ Template.Home.events({
       event.preventDefault()
       
       // Variables from DOM
-      var periodizer = Periodizers.find({ userId: Meteor.userId() }).fetch()[0]
+      var periodizer = Periodizers.find({ user_id: Meteor.userId() }).fetch()[0]
       var periodizer_id = periodizer._id
       var forms = _.map($('.exercise-form'), function(form) { return $(form) })
       
@@ -130,8 +130,11 @@ Template.Home.events({
 Template.Home.helpers({
 
 	'user_has_periodizer': function() {
-		return Periodizers.find({ userId: Meteor.userId() }).count()
+		return Periodizers.find({ user_id: Meteor.userId() }).count()
 	},
+  'user_has_chart': function() {
+    return Charts.find({ user_id: Meteor.userId() }).count()
+  },
 	loopCount: function(count){
     var countArr = [];
     for (var i=0; i<count; i++){
@@ -140,7 +143,7 @@ Template.Home.helpers({
     return countArr;
   },
   'no_of_exercises': function() {
-    var periodizer = Periodizers.find({ userId: Meteor.userId() }).fetch()
+    var periodizer = Periodizers.find({ user_id: Meteor.userId() }).fetch()
     var count = periodizer[0].no_of_exercises
     return count;
   }

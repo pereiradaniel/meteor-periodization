@@ -13,7 +13,7 @@ Template.Periodizer.events({
 			Periodizers.insert({
 				weeks: weeks,
 				no_of_exercises: no_of_exercises,
-				userId: Meteor.userId()
+				user_id: Meteor.userId()
 			}, function(err, res) {
 				if(!err) {
 					console.log('success')
