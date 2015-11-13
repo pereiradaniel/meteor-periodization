@@ -69,7 +69,6 @@ Template.Home.events({
         for (var exercise_counter = 0; exercise_counter < exercises.length; exercise_counter++) {
           var exercise = exercises[exercise_counter]
           var max = parseInt(exercise.one_rm)
-          debugger
           for (var set = 0; set < sets; set++) {
             var percent = base_relative_to_week + (set * 0.05)
             var weight_this_set = percent * max
