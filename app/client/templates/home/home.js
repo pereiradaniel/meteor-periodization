@@ -65,14 +65,15 @@ Template.Home.events({
       var reps = light_reps * 2
       var last_week_number = weeks
       var output = []
-        
+
         for (var exercise_counter = 0; exercise_counter < exercises.length; exercise_counter++) {
+          var sets_of_exercise = []
           var exercise = exercises[exercise_counter]
           var max = parseInt(exercise.one_rm)
           for (var set = 0; set < sets; set++) {
             var percent = base_relative_to_week + (set * 0.05)
             var weight_this_set = percent * max
-            output.push({
+            sets_of_exercise.push({
               week: last_week_number,
               exercise_id: exercise._id,
               set: set + 1,
@@ -80,6 +81,7 @@ Template.Home.events({
               reps: reps
             })
           }
+          output.push(sets_of_exercise)
         }
 
       return output
@@ -96,8 +98,8 @@ Template.Home.events({
 
       for (var week = 1; week < weeks; week++) {
         var calculated_week = []
-        for (var exercise = 0; exercise < exercises.length; exercise++) {
-          var exercise_weekly_set = calculateWeeklySet(week, exercises[exercise])
+        for (var exercise_counter = 0; exercise_counter < exercises.length; exercise_counter++) {
+          var exercise_weekly_set = calculateWeeklySet(week, exercises[exercise_counter])
           calculated_week.push(exercise_weekly_set)
         }
         chart.weeks.push(calculated_week)

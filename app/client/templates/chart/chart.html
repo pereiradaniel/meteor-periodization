@@ -2,6 +2,8 @@
   <div class="chart">
     <h1>Chart</h1>
     {{ chart }}
-		{{ chart.weeks }}
+		{{ #each chart.weeks }}
+			{{> Week }}
+		{{/each}}
   </div>
 </template>
