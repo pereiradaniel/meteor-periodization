@@ -1,6 +1,6 @@
 <template name="WeeksList">
   <div class="weeks-list">
-    <h4>Week #</h4>
+    <h4>Week # {{ week_number(this[0]) }}</h4>
     	{{ #each this }}
 				{{ > SetsOfExercise }}
     	{{ /each }}
