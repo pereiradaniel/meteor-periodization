@@ -1,6 +1,6 @@
 <template name="SetsOfExercise">
   <div class="sets-of-exercise">
-    <h1>Find me in app/client/templates/sets_of_exercise/sets_of_exercise</h1>
+  		<h4>Exercise name {{ exercise_name(this[0]) }} </h4>
     	{{ #each this }}
 				{{ > ExerciseSet }}
     	{{ /each }}
