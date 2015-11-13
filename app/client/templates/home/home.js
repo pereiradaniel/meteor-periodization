@@ -52,6 +52,40 @@ Template.Home.events({
       return output
     }
 
+    var updateChart = function(chart) {
+      Charts.update({ _id: chart._id }, {
+        $set: {
+          weeks: chart.weeks
+        }
+      })
+    }
+
+    var calculateEnduranceWeek = function() {
+      var base_relative_to_week = base_percentage - 0.1
+      var reps = light_reps * 2
+      var last_week_number = weeks
+      var output = []
+        
+        for (var exercise_counter = 0; exercise_counter < exercises.length; exercise_counter++) {
+          var exercise = exercises[exercise_counter]
+          var max = parseInt(exercise.one_rm)
+          debugger
+          for (var set = 0; set < sets; set++) {
+            var percent = base_relative_to_week + (set * 0.05)
+            var weight_this_set = percent * max
+            output.push({
+              week: last_week_number,
+              exercise_id: exercise._id,
+              set: set + 1,
+              weight_this_set: weight_this_set,
+              reps: reps
+            })
+          }
+        }
+
+      return output
+    }
+
     var addChartToCollection = function() {
       Charts.insert({
         user_id: Meteor.userId(),
@@ -68,13 +102,11 @@ Template.Home.events({
           calculated_week.push(exercise_weekly_set)
         }
         chart.weeks.push(calculated_week)
-        Charts.update({ _id: chart._id }, {
-          $set: {
-            weeks: chart.weeks
-          }
-        })
+        updateChart(chart)
       }
-
+      var endurance_week = calculateEnduranceWeek()
+      chart.weeks.push(endurance_week)
+      updateChart(chart)
     }
 
     // ADDS EXERCISE DOCUMENTS TO COLLECTION
