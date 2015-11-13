@@ -6,14 +6,12 @@ Template.Home.events({
       event.preventDefault()
       
       // Variables from DOM
-      var periodizer = Periodizers.find({ userId: Meteor.userId() }).fetch()[0]._id
+      var periodizer = Periodizers.find({ userId: Meteor.userId() }).fetch()[0]
       var periodizer_id = periodizer._id
       var forms = _.map($('.exercise-form'), function(form) { return $(form) })
-      var number_of_forms = forms.length
       
       // Variables required to calculate sets
-      var weeks = pdizer.weeks
-      var exercises = Exercises.find({ periodizer_id: periodizer }).fetch()
+      var weeks = parseInt(periodizer.weeks)
         var sets = 4
         var set_increment = 0.05
         var no_of_exercises = periodizer.no_of_exercises
@@ -27,56 +25,67 @@ Template.Home.events({
         var weekly_percentage_increment = (high_percentage - base_percentage) / strength_weeks
         var weekly_rep_decrement = (light_reps - heavy_reps) / strength_weeks // ROUND THIS # !!!
 
-    addExercise: function(exercise_name, one_rm) {
+        var addExercise = function(exercise_name, one_rm) {
           Exercises.insert({
             exercise_name: exercise_name,
             one_rm: one_rm,
             periodizer_id: periodizer_id
           })
-        },
+        }
     
-    calculateWeeklySet: function(week_number, exercise) {
+      var calculateWeeklySet = function(week_number, exercise) {
       var base_relative_to_week = base_percentage + (weekly_percentage_increment * week_number)
-      var max = exercises[exercise].one_rm
+      var max = parseInt(exercise.one_rm)
       var reps = light_reps - (weekly_rep_decrement * week_number)
-      for var(set = 1; set < sets; set++) {
+      var output = []
+      for (var set = 0; set < sets; set++) {
         var percent = base_relative_to_week + (set * 0.05)
         var weight_this_set = percent * max
         output.push({
-          set: set,
+          week: week_number,
+          exercise_id: exercise._id,
+          set: set + 1,
           weight_this_set: weight_this_set,
           reps: reps
         })
       }
       return output
-    },
+    }
 
-    addChartToCollection: function() {
+    var addChartToCollection = function() {
       Charts.insert({
         user_id: Meteor.userId(),
         periodization_id: periodizer_id,
-      })
+        weeks: []
+     })
       
-      var chart = Charts.find({ userId: Meteor.userId() }).fetch()[0]
+      var chart = Charts.find({ user_id: Meteor.userId() }).fetch()[0]
 
       for (var week = 1; week < weeks; week++) {
-        var calculated_week = {}
+        var calculated_week = []
         for (var exercise = 0; exercise < exercises.length; exercise++) {
           var exercise_weekly_set = calculateWeeklySet(week, exercises[exercise])
-          calculated_week.push({exercise_weekly_set})
+          calculated_week.push(exercise_weekly_set)
         }
-        chart.push({calculated_week})
+        chart.weeks.push(calculated_week)
+        Charts.update({ _id: chart._id }, {
+          $set: {
+            weeks: chart.weeks
+          }
+        })
       }
-    },
+
+    }
 
     // ADDS EXERCISE DOCUMENTS TO COLLECTION
-    for (var current_form = 0; current_form < number_of_forms; i++) {
+    for (var current_form = 0; current_form < forms.length; current_form++) {
         form = forms[current_form]
         exercise_name = form.children('.exercise_name').val()
         one_rm = form.children('.one_rm').val()
         addExercise(exercise_name, one_rm)
       }
 
+      var exercises = Exercises.find({ periodizer_id: periodizer_id }).fetch()
       addChartToCollection()
 
     // ADDS CHART DOCUMENT TO COLLECTION

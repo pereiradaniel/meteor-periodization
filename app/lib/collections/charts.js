@@ -4,29 +4,29 @@ Charts = new Mongo.Collection('charts');
 if (Meteor.isServer) {
   Charts.allow({
     insert: function (userId, doc) {
-      return false;
+      return true;
     },
 
     update: function (userId, doc, fieldNames, modifier) {
-      return false;
+      return true;
     },
 
     remove: function (userId, doc) {
-      return false;
+      return true;
     }
   });
 
   Charts.deny({
     insert: function (userId, doc) {
-      return true;
+      return false;
     },
 
     update: function (userId, doc, fieldNames, modifier) {
-      return true;
+      return false;
     },
 
     remove: function (userId, doc) {
-      return true;
+      return false;
     }
   });
 }
