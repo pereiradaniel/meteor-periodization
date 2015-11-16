@@ -1,9 +1,10 @@
 <template name="Chart">
   <div class="chart">
     <h1>Chart</h1>
-    {{ chart }}
 		{{ #each chart.weeks }}
-			{{> WeeksList }}
+			<ul>
+				{{> WeeksList }}
+			</ul>
 		{{/each}}
   </div>
 </template>

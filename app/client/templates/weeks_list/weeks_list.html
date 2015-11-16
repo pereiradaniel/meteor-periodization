@@ -1,8 +1,10 @@
 <template name="WeeksList">
+<li>
   <div class="weeks-list">
     <h4>Week # {{ week_number(this[0]) }}</h4>
     	{{ #each this }}
 				{{ > SetsOfExercise }}
     	{{ /each }}
   </div>
+</li>
 </template>

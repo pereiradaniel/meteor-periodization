@@ -26,3 +26,5 @@ aldeed:collection2
 accounts-ui
 accounts-password
 fourseven:scss
+meteoric:ionic-sass
+meteoric:ionicons-sass
