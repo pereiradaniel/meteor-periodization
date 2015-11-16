@@ -25,4 +25,7 @@ msavin:jetsetter
 aldeed:collection2
 accounts-ui
 accounts-password
-fourseven:scss
+fourseven:scss@2.0.0
+meteoric:ionic
+meteoric:ionic-sass
+meteoric:ionicons-sass
