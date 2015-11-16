@@ -1,8 +1,13 @@
 <template name="WeeksList">
   <div class="weeks-list">
-    <h4>Week # {{ week_number(this[0]) }}</h4>
+    {{#ionItem class="bar bar-header bar-energized"}}
+    	<h4 class="title">Week # {{ week_number(this[0]) }}</h4>
+		{{/ionItem}}
+
+		{{#ionItem}}
     	{{ #each this }}
 				{{ > SetsOfExercise }}
     	{{ /each }}
+    {{/ionItem}}
   </div>
 </template>

@@ -1,8 +1,15 @@
 <template name="SetsOfExercise">
   <div class="sets-of-exercise">
-  		<h4>Exercise name {{ exercise_name(this[0]) }} </h4>
-    	{{ #each this }}
-				{{ > ExerciseSet }}
-    	{{ /each }}
+  		{{#ionList}}
+	  		{{#ionItem class="bar bar-dark"}}
+	  		<h4 class="title">{{ exercise_name(this[0]) }} </h4>
+	    	{{/ionItem}}
+	    	
+	    	{{ #each this }}
+	    		{{#ionList class="list card"}}
+						{{ > ExerciseSet }}
+	    		{{/ionList}}
+	    	{{ /each }}
+    	{{/ionList}}
   </div>
 </template>

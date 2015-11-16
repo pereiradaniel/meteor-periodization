@@ -1,9 +1,14 @@
 <template name="Chart">
   <div class="chart">
-    <h1>Chart</h1>
-    {{ chart }}
-		{{ #each chart.weeks }}
-			{{> WeeksList }}
-		{{/each}}
+    {{#ionItem class="bar bar-stable"}}
+    	<h1 class="title">Chart</h1>
+    {{/ionItem}}
+
+			{{ #each chart.weeks }}
+				{{#ionList}}
+					{{> WeeksList }}
+				{{/ionList}}
+			{{/each}}
+
   </div>
 </template>

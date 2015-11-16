@@ -1,12 +1,19 @@
 <template name="ExerciseSet">
   <div class="exercise-set">
-		{{ #with this}}
-			<h4>Set #{{ set }}</h4>
-			<ul>
-				<li>{{ week }}</li>
-				<li>{{ reps }}</li>
-				<li>{{ weight_this_set}}</li>
-			</ul>
-		{{ /with }}
+			{{ #with this}}
+
+				{{#ionItem class="bar bar-header bar-stable"}}
+					<h4 class="title">Set #{{ set }}</h4>
+				{{/ionItem}}
+
+				{{#ionItem}}
+					Reps {{ reps }}
+				{{/ionItem}}
+
+				{{#ionItem}}
+					Weight {{ weight_this_set}}
+				{{/ionItem}}
+
+			{{ /with }}
   </div>
 </template>

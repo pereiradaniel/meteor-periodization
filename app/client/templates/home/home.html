@@ -1,22 +1,33 @@
 <template name="Home">
   <div class="home">
-    <h1>Welcome to the Periodizer Project</h1>
-		
-		{{#if currentUser}}
-			{{#if user_has_chart}}
-				{{> Chart}}
-			{{else}}			
-				{{#if user_has_periodizer}}
-					<form id="exercises_form">
-			  		{{#each loopCount no_of_exercises}}	
-							{{> ExerciseForm}}
-						{{/each}}
-					<input type="submit">
-					</form>
-				{{else}}
-	    		{{> Periodizer}}
+
+	{{#contentFor "headerTitle"}}
+	  <h1 class="title">Periodizer Project</h1>
+	{{/contentFor}}
+
+	{{#if currentUser}}
+		{{#ionView}}
+			{{#ionContent}}
+				{{#if user_has_chart}}
+					{{> Chart}}
+				{{else}}			
+					{{#if user_has_periodizer}}
+						<form id="exercises_form">
+				  		{{#each loopCount no_of_exercises}}	
+								{{> ExerciseForm}}
+							{{/each}}
+						<button class="button button-block button-positive">
+							Submit
+						</button>
+
+						</form>
+					{{else}}
+		    		{{> Periodizer}}
+		    	{{/if}}
 	    	{{/if}}
-    	{{/if}}
-    {{/if}}
+	    {{/ionContent}}
+		{{/ionView}}
+  {{/if}}
+
   </div>
 </template>
