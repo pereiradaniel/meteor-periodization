@@ -26,7 +26,6 @@ Template.Home.events({
         var weekly_rep_decrement = (light_reps - heavy_reps) / strength_weeks // ROUND THIS # !!!
 
         var addExercise = function(exercise_name, one_rm) {
-          debugger
           Exercises.insert({
             exercise_name: exercise_name,
             one_rm: one_rm,
@@ -114,9 +113,8 @@ Template.Home.events({
     // ADDS EXERCISE DOCUMENTS TO COLLECTION
     for (var current_form = 0; current_form < forms.length; current_form++) {
         form = forms[current_form]
-        var exercise_name = form.children('.exercise_name').val()
-        var one_rm = form.children('.one_rm').val()
-        debugger
+        var exercise_name = form.children('.item-input').children('.exercise_name').val()
+        var one_rm = form.children('.item-input').children('.one_rm').val()
         addExercise(exercise_name, one_rm)
       }
 
