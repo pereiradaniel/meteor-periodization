@@ -136,18 +136,6 @@ Template.Home.helpers({
 	},
   'user_has_chart': function() {
     return Charts.find({ user_id: Meteor.userId() }).count()
-  },
-	loopCount: function(count){
-    var countArr = [];
-    for (var i=0; i<count; i++){
-      countArr.push({});
-    }
-    return countArr;
-  },
-  'no_of_exercises': function() {
-    var periodizer = Periodizers.find({ user_id: Meteor.userId() }).fetch()
-    var count = periodizer[0].no_of_exercises
-    return count;
   }
 });
 

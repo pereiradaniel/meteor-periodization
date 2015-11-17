@@ -1,0 +1,26 @@
+<template name="SetExercises">
+  <div class="set-exercises">
+
+    {{#contentFor "headerButtonLeft"}}
+      {{>ionNavBackButton}}
+    {{/contentFor}}
+
+		{{#contentFor "headerTitle"}}
+		  <h1 class="title">Set exercises</h1>
+		{{/contentFor}}
+
+	  {{#ionContent}}
+  	  <form id="exercises_form">
+    		<div class="list">
+			    {{#each loopCount no_of_exercises}}	
+			    	{{> ExerciseForm}}
+			    {{/each}}
+    		</div>
+				<button class="button button-block button-positive">
+					Submit
+				</button>
+		  </form>
+    {{/ionContent}}
+    
+  </div>
+</template>

@@ -1,14 +1,21 @@
 <template name="Chart">
   <div class="chart">
+    
+    {{#contentFor "headerButtonLeft"}}
+      {{>ionNavBackButton}}
+    {{/contentFor}}
+
     {{#ionItem class="bar bar-stable"}}
     	<h1 class="title">Chart</h1>
     {{/ionItem}}
 
+		{{#ionContent}}
 			{{ #each chart.weeks }}
 				{{#ionList}}
 					{{> WeeksList }}
 				{{/ionList}}
 			{{/each}}
+		{{/ionContent}}
 
   </div>
 </template>

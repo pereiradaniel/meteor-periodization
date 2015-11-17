@@ -5,6 +5,47 @@
 	  <h1 class="title">Periodizer Project</h1>
 	{{/contentFor}}
 
+	{{#ionView}}
+		{{#if currentUser}}
+			{{#ionContent}}
+				{{#ionList}}
+
+					{{#if user_has_periodizer}}
+
+						{{#ionItem path="setExercises" iconLeft=true iconRight=true}}
+							{{> ionIcon icon="ios-checkmark" class="negative"}}
+							Set exercises
+							{{> ionIcon icon="ios-arrow-right"}}
+						{{/ionItem}}
+
+					{{else}}
+
+						{{#ionItem path="periodizer" iconLeft=true iconRight=true}}
+							{{> ionIcon icon="ios-checkmark" class="negative"}}
+							Periodization settings
+							{{> ionIcon icon="ios-arrow-right"}}
+						{{/ionItem}}
+
+
+					{{/if}}
+
+					{{#if user_has_chart}}
+
+						{{#ionItem path="chart" iconLeft=true iconRight=true}}
+							{{> ionIcon icon="ios-checkmark" class="positive"}}
+							View Periodization Chart
+							{{> ionIcon icon="ios-arrow-right"}}
+						{{/ionItem}}
+
+					{{else}}
+					{{/if}}
+
+				{{/ionList}}
+			{{/ionContent}}
+		{{/if}}
+
+	{{/ionView}}
+<!-- 
 	{{#if currentUser}}
 		{{#ionView}}
 			{{#ionContent}}
@@ -33,6 +74,6 @@
 	    {{/ionContent}}
 		{{/ionView}}
   {{/if}}
-
+ -->
   </div>
 </template>
