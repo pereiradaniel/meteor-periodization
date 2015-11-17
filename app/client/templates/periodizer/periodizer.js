@@ -21,9 +21,7 @@ Template.Periodizer.events({
 					console.log('failure')
 				}
 			})
-
-			t.weeks.value = "";
-			t.no_of_exercises.value ="";
+			Router.go('home');
 	}
 });
 

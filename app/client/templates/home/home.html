@@ -12,11 +12,29 @@
 
 					{{#if user_has_periodizer}}
 
-						{{#ionItem path="setExercises" iconLeft=true iconRight=true}}
-							{{> ionIcon icon="ios-checkmark" class="negative"}}
-							Set exercises
+						{{#ionItem path="periodizer" iconLeft=true iconRight=true}}
+							{{> ionIcon icon="ios-checkmark" class="positive"}}
+							View Periodization settings
 							{{> ionIcon icon="ios-arrow-right"}}
 						{{/ionItem}}
+
+						{{#if user_has_exercises}}
+							
+							{{#ionItem path="setExercises" iconLeft=true iconRight=true}}
+								{{> ionIcon icon="ios-checkmark" class="positive"}}
+								View exercises
+								{{> ionIcon icon="ios-arrow-right"}}
+							{{/ionItem}}
+
+						{{else}}
+						
+							{{#ionItem path="setExercises" iconLeft=true iconRight=true}}
+								{{> ionIcon icon="ios-checkmark" class="negative"}}
+								Set exercises
+								{{> ionIcon icon="ios-arrow-right"}}
+							{{/ionItem}}
+
+						{{/if}}
 
 					{{else}}
 
@@ -25,7 +43,6 @@
 							Periodization settings
 							{{> ionIcon icon="ios-arrow-right"}}
 						{{/ionItem}}
-
 
 					{{/if}}
 
