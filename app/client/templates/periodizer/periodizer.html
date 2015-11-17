@@ -1,12 +1,22 @@
 <template name="Periodizer">
   <div class="periodizer">
-    <h4>Periodizer</h4>
+    {{#ionItem class="bar bar-positive"}}
+    <h4 class="title">Periodizer</h4>
+    {{/ionItem}}
     <form id='periodizer_form'>
-    	<input type="number" placeholder='Number of weeks' name='weeks' id='weeks'>
-    	<input type="number" placeholder='Number of exercises' name='no_of_exercises' id='no_of_exercises'>
-			<button class="button button-block button-positive">
+    {{#ionItem}}
+      <div class="list">
+      <label class="item item-input">
+    	 <input type="number" placeholder='Number of weeks' name='weeks' id='weeks'>
+      </label>
+      <label class="item item-input">
+    	 <input type="number" placeholder='Number of exercises' name='no_of_exercises' id='no_of_exercises'>
+      </label>
+		  </div>
+      <button class="button button-block button-positive">
 				Submit
 			</button>
+    {{/ionItem}}
     </form>
   </div>
 </template>

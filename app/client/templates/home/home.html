@@ -13,16 +13,21 @@
 				{{else}}			
 					{{#if user_has_periodizer}}
 						<form id="exercises_form">
+						{{#ionItem}}
+						<div class="list">
 				  		{{#each loopCount no_of_exercises}}	
 								{{> ExerciseForm}}
 							{{/each}}
+						</div>
 						<button class="button button-block button-positive">
 							Submit
 						</button>
-
+						{{/ionItem}}
 						</form>
 					{{else}}
-		    		{{> Periodizer}}
+						{{#ionItem}}
+		    			{{> Periodizer}}
+						{{/ionItem}}
 		    	{{/if}}
 	    	{{/if}}
 	    {{/ionContent}}
