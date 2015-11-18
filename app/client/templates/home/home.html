@@ -9,11 +9,13 @@
   {{/contentFor}}
 
 	{{#ionView}}
-		{{#if currentUser}}
-			{{#ionContent}}
-				{{#ionList}}
 
-				{{> loginButtons}}      
+		{{#ionContent}}
+			{{#ionList}}
+			{{> loginButtons}}      
+
+				{{#if currentUser}}
+
 					{{#if user_has_periodizer}}
 
 						{{#ionItem path="periodizer" iconLeft=true iconRight=true}}
@@ -61,9 +63,10 @@
 					{{else}}
 					{{/if}}
 
-				{{/ionList}}
-			{{/ionContent}}
-		{{/if}}
+				{{/if}}
+
+			{{/ionList}}
+		{{/ionContent}}
 
 	{{/ionView}}
 <!-- 
