@@ -12,6 +12,7 @@ Template.Chart.helpers({
 	'chart': function() {  
     // var chart = Charts.find({ user_id: Meteor.userId() }).fetch()[0]
     // var chart_weeks = chart.weeks
+    debugger
     return Charts.find({ user_id: Meteor.userId() }).fetch()[0]
   }
 });
