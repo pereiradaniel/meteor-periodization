@@ -5,11 +5,15 @@
 	  <h1 class="title">Periodizer Project</h1>
 	{{/contentFor}}
 
+  {{#contentFor "headerButtonLeft"}}
+  {{/contentFor}}
+
 	{{#ionView}}
 		{{#if currentUser}}
 			{{#ionContent}}
 				{{#ionList}}
 
+				{{> loginButtons}}      
 					{{#if user_has_periodizer}}
 
 						{{#ionItem path="periodizer" iconLeft=true iconRight=true}}

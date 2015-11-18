@@ -1,12 +1,8 @@
 <template name="MasterLayout">
   {{#ionBody}}
 		
-    <div>
-			{{> loginButtons}}
-		</div>
-		
     {{> ionNavBar}}
-  	
+    
   	{{#ionNavView}}
   		{{> yield}}
   	{{/ionNavView}}
