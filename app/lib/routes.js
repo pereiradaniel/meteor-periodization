@@ -15,4 +15,5 @@ Router.map(function(){
 	this.route('periodizer');
 	this.route('chart');
 	this.route('setExercises');
+	this.route('signIn');
 });

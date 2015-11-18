@@ -1,18 +1,23 @@
 <template name="Home">
   <div class="home">
+	
+	{{#if currentUser}}
+	  {{#contentFor "headerButtonLeft"}}
+	  	{{>atNavButton}}
+	  {{/contentFor}}
+	{{else}}
+  {{/if}}
 
 	{{#contentFor "headerTitle"}}
 	  <h1 class="title">Periodizer Project</h1>
 	{{/contentFor}}
 
-  {{#contentFor "headerButtonLeft"}}
-  {{/contentFor}}
 
 	{{#ionView}}
 
 		{{#ionContent}}
 			{{#ionList}}
-			{{> loginButtons}}      
+			<!-- {{> loginButtons}}       -->
 
 				{{#if currentUser}}
 
@@ -62,6 +67,12 @@
 
 					{{else}}
 					{{/if}}
+				
+				{{else}}
+				
+					{{#ionItem path="signIn"}}
+					Sign in
+					{{/ionItem}}
 
 				{{/if}}
 
