@@ -10,16 +10,18 @@
 		{{/contentFor}}
 
 	  {{#ionContent}}
-  	  <form id="exercises_form">
-    		<div class="list">
-			    {{#each loopCount no_of_exercises}}	
-			    	{{> ExerciseForm}}
-			    {{/each}}
-    		</div>
-				<button class="button button-block button-positive">
-					Submit
-				</button>
-		  </form>
+	  	{{#ionItem}}
+	  	  <form id="exercises_form">
+	    		<div class="list">
+				    {{#each loopCount no_of_exercises}}	
+				    	{{> ExerciseForm}}
+				    {{/each}}
+	    		</div>
+					<button class="button button-block button-positive">
+						Submit
+					</button>
+			  </form>
+			  {{/ionItem}}
     {{/ionContent}}
     
   </div>
